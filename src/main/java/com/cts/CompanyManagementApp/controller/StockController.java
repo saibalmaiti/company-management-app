@@ -25,7 +25,7 @@ public class StockController {
     @PostMapping("/add/{companyCode}")
     public ResponseEntity<?> addStock(@RequestBody Stock stock, @PathVariable(name = "companyCode") long companyCode) {
         Company company = companyService.getCompanyByCode(companyCode);
-        log.info(company.toString());
+//        log.info(company.toString());
         if(company!=null) {
             company.setStockPrice(stock.getStockPrice());
             if(companyService.updateCompany(company) && stockService.addStock(stock)) {

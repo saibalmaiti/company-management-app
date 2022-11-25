@@ -1,6 +1,5 @@
 package com.cts.CompanyManagementApp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +27,6 @@ public class Company {
     @NotBlank(message = "stock exchange is mandatory")
     private String stockExchange;
     private double stockPrice;
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Company.class)
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Stock.class)
     private List<Stock> stockList;
 }
