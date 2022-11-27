@@ -32,7 +32,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     @Override
     public Company getCompanyByCode(long companyCode) {
-        Optional<Company> optionalCompany = companyRepo.findById(companyCode);
+        Optional<Company> optionalCompany = companyRepo.findCompanyByCompanyCode(companyCode);
         if(optionalCompany.isPresent())
             return optionalCompany.get();
         return null;

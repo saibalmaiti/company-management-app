@@ -43,7 +43,7 @@ public class CompanyController {
     }
     @DeleteMapping("/delete/{companycode}")
     public ResponseEntity<?> deleteCompanyByCode(@PathVariable(name ="companycode") long companyCode) {
-        if (stockService.deleteStock(companyCode) && companyService.deleteCompany(companyCode))
+        if ( companyService.deleteCompany(companyCode))
             return ResponseEntity.ok().body("Company Deleted Successfully");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Company can't be deleted");
     }

@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -22,6 +19,6 @@ public class Stock {
     @CreationTimestamp
     private Date updatedAt;
     private double stockPrice;
-    private long company_code_fk;
+//    private long company_code_fk;
 
 }

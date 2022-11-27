@@ -27,6 +27,8 @@ public class Company {
     @NotBlank(message = "stock exchange is mandatory")
     private String stockExchange;
     private double stockPrice;
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Stock.class)
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="company_code_fk")
     private List<Stock> stockList;
 }

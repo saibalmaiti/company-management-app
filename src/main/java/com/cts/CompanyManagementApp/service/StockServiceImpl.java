@@ -14,7 +14,7 @@ public class StockServiceImpl implements StockService{
     @Override
     public boolean addStock(Stock stock) {
         stock.setStockPrice(stock.getStockPrice());
-        stock.setCompany_code_fk(stock.getCompany_code_fk());
+//        stock.setCompany_code_fk(stock.getCompany_code_fk());
         stockRepo.save(stock);
         return true;
     }

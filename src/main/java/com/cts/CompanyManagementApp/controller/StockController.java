@@ -28,7 +28,8 @@ public class StockController {
 //        log.info(company.toString());
         if(company!=null) {
             company.setStockPrice(stock.getStockPrice());
-            if(companyService.updateCompany(company) && stockService.addStock(stock)) {
+            company.getStockList().add(stock);
+            if(companyService.updateCompany(company)) {
                 return ResponseEntity.ok().body("Company table updated and Stock table added Successfully");
             }
         }
