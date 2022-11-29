@@ -2,15 +2,18 @@ package com.cts.CompanyManagementApp.controller;
 
 import com.cts.CompanyManagementApp.exception.DuplicateCompanyCodeException;
 import com.cts.CompanyManagementApp.model.Company;
+import com.cts.CompanyManagementApp.response.ResponseHandler;
 import com.cts.CompanyManagementApp.service.CompanyService;
 import com.cts.CompanyManagementApp.service.StockService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/api/v1.0/market/company")
@@ -20,6 +23,7 @@ public class CompanyController {
     private CompanyService companyService;
     @Autowired
     private StockService stockService;
+    CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.HOURS);
     @PostMapping("/register")
     public ResponseEntity<?> registerCompany(@Valid @RequestBody Company company)throws DuplicateCompanyCodeException {
         log.info(company.toString());
@@ -29,11 +33,15 @@ public class CompanyController {
     }
     @GetMapping("/getall")
     public ResponseEntity<?> getAllCompany() {
-        return ResponseEntity.ok().body(companyService.getAllCompany());
+        return ResponseEntity.ok().cacheControl(cacheControl)
+                .body(ResponseHandler.generateResponse("Successfully fetching the data",HttpStatus.OK,companyService.getAllCompany()));
+//        return ResponseEntity.ok().body(companyService.getAllCompany());
     }
     @GetMapping("/info/{companycode}")
     public ResponseEntity<?> getAllCompanyByCode(@PathVariable(name = "companycode") long companyCode) {
-        return ResponseEntity.ok().body(companyService.getCompanyByCode(companyCode));
+        return ResponseEntity.ok().cacheControl(cacheControl)
+                .body(ResponseHandler.generateResponse("Successfully fetching the data",HttpStatus.OK,companyService.getCompanyByCode(companyCode)));
+//        return ResponseEntity.ok().body(companyService.getCompanyByCode(companyCode));
     }
     @PutMapping("/put/{companycode}")
     public ResponseEntity<?> updateCompanyByCode(@PathVariable(name="companycode") long companyCode, @RequestBody Company company) {
