@@ -20,8 +20,8 @@ public class StockServiceImpl implements StockService{
     }
 
     @Override
-    public boolean deleteStock(long companyCode) {
-        stockRepo.deleteStock(companyCode);
+    public boolean deleteStock(long transactionId) {
+        stockRepo.deleteById(transactionId);
         return true;
     }
 }

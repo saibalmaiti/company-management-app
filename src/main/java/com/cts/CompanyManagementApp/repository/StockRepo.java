@@ -11,7 +11,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface StockRepo extends JpaRepository<Stock, Long> {
-    @Modifying
-    @Query(value = "DELETE FROM Stock WHERE company_code_fk= :companyCode")
-    public void deleteStock(long companyCode);
+
 }

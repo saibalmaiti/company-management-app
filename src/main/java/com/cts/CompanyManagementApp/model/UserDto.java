@@ -1,4 +1,4 @@
-package com.cts.CompanyManagementApp.controller;
+package com.cts.CompanyManagementApp.model;
 
 import lombok.Data;
 
