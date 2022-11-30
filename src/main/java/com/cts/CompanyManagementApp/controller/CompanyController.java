@@ -23,7 +23,7 @@ public class CompanyController {
     private CompanyService companyService;
     @Autowired
     private StockService stockService;
-    CacheControl cacheControl = CacheControl.maxAge(30, TimeUnit.HOURS);
+    CacheControl cacheControl = CacheControl.maxAge(2, TimeUnit.MINUTES);
     @PostMapping("/register")
     public ResponseEntity<?> registerCompany(@Valid @RequestBody Company company)throws DuplicateCompanyCodeException {
         log.info(company.toString());

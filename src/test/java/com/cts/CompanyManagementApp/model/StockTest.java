@@ -25,6 +25,6 @@ public class StockTest {
     @Test
     void testTimeStamp() {
         when(stock.getUpdatedAt()).thenReturn(new Date());
-        assertEquals(new Date(), stock.getUpdatedAt());
+        assertEquals(new Date().toString(), stock.getUpdatedAt().toString());
     }
 }

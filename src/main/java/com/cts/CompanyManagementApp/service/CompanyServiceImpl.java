@@ -2,7 +2,9 @@ package com.cts.CompanyManagementApp.service;
 
 import com.cts.CompanyManagementApp.exception.DuplicateCompanyCodeException;
 import com.cts.CompanyManagementApp.model.Company;
+import com.cts.CompanyManagementApp.model.ExJWT;
 import com.cts.CompanyManagementApp.repository.CompanyRepo;
+import com.cts.CompanyManagementApp.repository.ExJWTRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService{
     @Autowired
     private CompanyRepo companyRepo;
+    @Autowired
+    private ExJWTRepo exJWTRepo;
 
     @Override
     public Company addCompany(Company company) throws DuplicateCompanyCodeException {
@@ -58,6 +62,14 @@ public class CompanyServiceImpl implements CompanyService{
     public boolean deleteCompany(long companyCode) {
         companyRepo.deleteById(companyCode);
         return true;
+    }
+
+    @Override
+    public ExJWT getExpiredToken(String tokenId) {
+        Optional<ExJWT> exJWTOptional = exJWTRepo.findById(tokenId);
+        if(exJWTOptional.isPresent())
+            return exJWTOptional.get();
+        return null;
     }
 
 
